@@ -1,1 +1,41 @@
-# TiMP
+#include <iostream>
+#include <cstdlib>
+#include <conio.h>
+using namespace std;
+double a, b;
+int main(int argc, char* argv[]) {
+    setlocale(LC_ALL, "Russian");
+    if (argc != 4)
+        cout << "Введите пожалуйста в формате (a ; +, -, *, / ; b)" << endl;
+    if (sizeof (argv[2]) != 1)
+        cout << "Введите пожалуйста в формате (a ; +, -, *, / ; b)" << endl;
+    a = strtod(argv[1], NULL);
+    b = strtod(argv[3], NULL);
+    
+    if ('+' == argv[2][0])
+        cout << a + b << endl;
+    if ('-' == argv[2][0])
+        cout << a - b << endl;
+    if ('*' == argv[2][0])
+        cout << a * b << endl;
+    if ('/' == argv[2][0])
+        cout << a / b << endl;
+    
+    try {
+        if (b == 0)
+            throw 1;
+        cout << a / b << endl;
+        }
+    catch (int i) {
+        cout << "Ошибка №" << i << " - деление на ноль!" << endl;
+        }
+    try {
+        if (argv[2][0] != '+', '/', '*', '-')
+            throw 2;
+        }
+    catch (int o) {
+        cout << "Ошибка №" << o << " - использование неккоретного символа!" << endl;
+        }
+    _getch();
+    return 0;
+}
