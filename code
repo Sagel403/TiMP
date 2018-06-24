@@ -1,45 +1,45 @@
 #include <iostream>
 #include <cstdlib>
-#include <conio.h>
-#include <string>
 using namespace std;
-double a, b;
 int main(int argc, char* argv[]) {
-    setlocale(LC_ALL, "Russian");
-    string input;
-    if (argc < 4 || strlen(argv[2]) != 1) {
-        cout << "Введите пожалуйста в формате (a ; +, -, *, / ; b)" << endl;
-        cin >> input;
-    }
-    else if (argc >= 4) {
-        a = strtod(argv[1], NULL);
-        b = strtod(argv[3], NULL);
-    }
- 
-    if ('+' == argv[2][0])
-        cout << a + b << endl;
-    if ('-' == argv[2][0])
-        cout << a - b << endl;
-    if ('*' == argv[2][0])
-        cout << a * b << endl;
-    if ('/' == argv[2][0])
-        cout << a / b << endl;
- 
-    try {
-        if (b == 0)
-            throw 1;
-        cout << a / b << endl;
-    }
-    catch (int i) {
-        cout << "Ошибка №" << i << " - деление на ноль!" << endl;
-    }
-    try {
-        if (argv[2][0] != '+', '/', '*', '-')
-            throw 2;
-    }
-    catch (int o) {
-        cout << "Ошибка №" << o << " - использование неккоретного символа!" << endl;
-    }
-    _getch();
-    return 0;
+	setlocale(LC_ALL, "Russian");
+	if (argc != 4) {
+		cout << "Введите пожалуйста в формате (a ; +, -, *, / ; b)" << endl;
+		exit(EXIT_FAILURE);
+	}
+	double a, b;
+	a = atof(argv[1]);
+	b = atof(argv[3]);
+    
+	try {
+		if (b == 0 && argv[2][0] == '/')
+			throw 1;
+
+		if (argv[2][0] != '+' && argv[2][0] != '/' && argv[2][0] != '*' && 				argv[2][0] != '-')
+			throw 2;
+
+		if ('+' == argv[2][0])
+		cout << a + b << endl;
+		if ('-' == argv[2][0])
+		cout << a - b << endl;
+		if ('*' == argv[2][0])
+		cout << a * b << endl;
+		if ('/' == argv[2][0])
+		cout << a / b << endl;
+	}
+	catch (int i)
+	{
+		switch (i)
+		{
+		case 1:
+			cout << "Ошибка № 1 - деление на ноль!" << endl;
+			break;
+
+		case 2:
+			cout << "Ошибка № 2 - использование некорректного знака!" << 			endl;
+			break;
+		}
+	}
+
+	return 0;
 }
